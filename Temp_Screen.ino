@@ -30,7 +30,7 @@ int tempArray[120];
 
 char currentString[3];
 
-void getTemp(){
+void getTemp(){                            
   float voltage = 0;
   float celsius = 0;
   float sensor = 0;
@@ -51,16 +51,16 @@ void getTemp(){
 
 void drawScreen(){
   int q;
-  tft.fillScreen(ST77XX_BLACK);
+  tft.fillScreen(ST77XX_BLACK);          //setting up tft screen to print onto it.
   tft.setCursor(0, 0);
   tft.setTextSize(2);
   tft.println("Current: ");
   String tempString = String(current);
   tempString.toCharArray(currentString, 3);
   tft.println(currentString);
-  //Drawing scale 
+  //Drawing scale                         //This draws values onto the Y axis on the left side.
   tft.setCursor(0, 40);
-  tft.print("50");
+  tft.print("50");      
   tft.setCursor(0, 60);
   tft.print("45");
   tft.setCursor(0, 80);
@@ -85,14 +85,14 @@ void drawScreen(){
    for (int a = 25 ; a < 145 ; a = a + 10)
   {
     // convert the temperature value to a suitable y-axis position on the LCD
-    q = (165 - (tempArray[a - 25]));//CHAMGE THIS VALUE SO STRAIGN LINE DISSAPEARS
+    q = (165 - (tempArray[a - 25]));//
     tft.drawPixel(a, q, ST77XX_WHITE);
   }
 }
 
 
 void setup(void) {
-  Serial.begin(9600);
+  Serial.begin(9600);                            //The following lines were used to test TFT display
   Serial.print(F("Hello! ST77xx TFT Test"));
   tft.init(240, 320);  
   Serial.println(F("Initialized"));
@@ -105,7 +105,7 @@ void setup(void) {
   delay(500);
 
   // large block of text
-  tft.fillScreen(ST77XX_BLACK);
+  tft.fillScreen(ST77XX_BLACK);            //Test TFT print
   tft.fillScreen(ST77XX_BLACK);
   tft.setCursor(0, 30);
   tft.setTextColor(ST77XX_RED);
@@ -119,11 +119,11 @@ void setup(void) {
 }
 
 void loop() {
-  getTemp();
-  drawScreen();
-  for (int a = 0 ; a < 20 ; a++) // wait 20 minutes until the next reading
+  getTemp();                        //Function call to get temp
+  drawScreen();                      //Function call to display values onto tft screen,
+  for (int a = 0 ; a < 20 ; a++) // wait  until the next reading
   {
-    delay(100);                // wait 1 minute
+    delay(100);                
   }
 }
 
